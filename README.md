@@ -15,8 +15,6 @@ In this project, we'll implement the following features:
 - Displaying a list of blog posts
 - Displaying details of a single blog post
 - Creating a new blog post
-- Editing an existing blog post
-- Toggling between light and dark mode
 - Responsive design
 
 ## 3. Technologies
@@ -65,13 +63,21 @@ Once started, you should see the following message:
 
 You can access the Admin UI to configure the database, and insert some data. Then, you can query the data using the REST API.
 
-5. Start the development server:
+5. Run the following command to insert sample data to the database:
+
+```bash
+npm run db:insert-data
+```
+
+> ⚠️ **Note**: You must perform step 4 before running this command. The insert data is randomized every time you run this command.
+
+6. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the website.
+7. Open [http://localhost:3000](http://localhost:3000) in your browser to see the website.
 
 ## 5. License
 
