@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+  * {
+    @apply text-base;
+  }
+}
+
+@layer components {
+  .pagination-item {
+    @apply rounded-full py-1 px-3 text-center transition-all;
+  }
+}
+
+@layer utilities {
+  .pagination-item-selected {
+    @apply bg-slate-800 text-white;
+  }
+}

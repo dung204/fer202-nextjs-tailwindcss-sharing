@@ -1,9 +1,17 @@
+import Pagination from '@/components/Pagination';
+import PerPageSelect from '@/components/PerPageSelect';
 import PaginatedResponse from '@/types/PaginatedResponse';
 import PaginationSearchParams from '@/types/PaginationSearchParams';
 import Post from '@/types/Post';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: 'Posts',
+  description: 'Posts page',
+};
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_PER_PAGE = 10;
@@ -21,11 +29,16 @@ export default async function Posts({ searchParams }: { searchParams: Pagination
 
   return (
     <section>
-      <h1>Posts page</h1>
-      <div>
+      <div className='flex md:flex-row flex-col gap-5 items-center justify-between text-base mb-10'>
+        <div>
+          Show <PerPageSelect /> posts per page
+        </div>
+        <Pagination perPage={perPage} totalPages={totalPages} />
+      </div>
+      <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-10'>
         {posts.map(post => (
           <Link key={post.id} href={`/posts/${post.id}`}>
-            <article>
+            <article className='shadow-xl rounded-2xl overflow-hidden h-full transition-all hover:-translate-y-3 hover:shadow-2xl'>
               {post.coverImageUrl && (
                 <Image
                   loading='lazy'
@@ -35,17 +48,14 @@ export default async function Posts({ searchParams }: { searchParams: Pagination
                   height={480}
                 />
               )}
-              <h2>{post.title}</h2>
-              <p>{post.content}</p>
+              <div className='p-3'>
+                <h2 className='line-clamp-3 text-lg font-bold h-[4.6em]'>{post.title}</h2>
+                <p className='line-clamp-3'>{post.content}</p>
+              </div>
             </article>
           </Link>
         ))}
       </div>
-      {Array.from({ length: totalPages }).map((_, index) => (
-        <Link key={index} href={`/posts?page=${index + 1}&perPage=${perPage}`}>
-          <button>{index + 1}</button>
-        </Link>
-      ))}
     </section>
   );
 }

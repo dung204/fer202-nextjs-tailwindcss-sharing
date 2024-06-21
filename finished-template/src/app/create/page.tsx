@@ -1,18 +1,36 @@
+import Button from '@/components/Button';
+import TextArea from '@/components/TextArea';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: 'Create Post',
+  description: 'Create post page',
+};
 
 export default function CreatePost() {
   return (
-    <section>
-      <form action={addPost}>
-        <label htmlFor='title'>Title:</label>
-        <input type='text' name='title' id='title' required />
-        <br />
-        <label htmlFor='content'>Content</label>
-        <textarea name='content' id='content' required></textarea>
-        <br />
-        <button type='submit'>Submit</button>
-      </form>
-    </section>
+    <form action={addPost}>
+      <section className='max-w-5xl m-auto rounded-2xl shadow-2xl overflow-hidden p-10'>
+        <TextArea
+          name='title'
+          id='title'
+          className='text-3xl font-extrabold mb-10'
+          placeholder='Post title here...'
+          required
+        />
+        <TextArea
+          name='content'
+          id='content'
+          className='text-base'
+          placeholder='Post content here...'
+          required
+        />
+      </section>
+      <div className='max-w-5xl mx-auto mt-10'>
+        <Button type='submit'>Publish</Button>
+      </div>
+    </form>
   );
 }
 
